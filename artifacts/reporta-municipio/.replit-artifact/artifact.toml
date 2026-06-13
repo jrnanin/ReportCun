@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "ReportaMunicipio"
+version = "1.0.0"
+id = "artifacts/reporta-municipio"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23798
+
+[services.development]
+run = "pnpm --filter @workspace/reporta-municipio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/reporta-municipio", "run", "build" ]
+publicDir = "artifacts/reporta-municipio/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23798"
+BASE_PATH = "/"
